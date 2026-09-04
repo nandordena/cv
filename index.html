@@ -30,9 +30,11 @@
     </h2>
     <div id="contact"></div>
     <div id="menu">
-      <button onclick="chageSection(this);" data-section="h" >Historial</button>
-      <button onclick="chageSection(this);" data-section="s" >Habilidades</button>
-        <div id="filter" class="dflex tColor2 dInline">
+      <div class="menu-row">
+        <button onclick="chageSection(this);" data-section="h" >Historial</button>
+        <button onclick="chageSection(this);" data-section="s" >Habilidades</button>
+      </div>
+      <div id="filter" class="menu-row tColor2">
         <i class="fa fa-filter" aria-hidden="true"></i>
         <select>
           <option value="all">Todos</option>
@@ -43,10 +45,11 @@
           <option value="av">Audiovisuales</option>
           <option value="art">Arte</option>
         </select>
-        </div> 
-      <br>
-      <button  class="display-skills" onclick="chageSubSection(this);"  data-section="s">Por Tipo</button>
-      <button  class="display-skills" onclick="chageSubSection(this);"  data-section="s-x">Por Experiencia (Pronto)</button> 
+      </div>
+      <div class="menu-row display-skills">
+        <button class="display-skills" onclick="chageSubSection(this);" data-section="s">Por Tipo</button>
+        <button class="display-skills" onclick="chageSubSection(this);" data-section="s-x">Por Experiencia (Pronto)</button>
+      </div>
     </div>
     
     <div class="display-skills" id="skills"></div>

@@ -59,7 +59,7 @@ Botones:
 - “Por Tipo” → `chageSubSection(this)` `data-section="s"` — **la función no existe en `script.js`**
 - “Por Experiencia (Pronto)” → `chageSubSection` `data-section="s-x"` — **igual, no implementado**; `s-x` no tiene reglas CSS de visibilidad
 
-Filtro de categorías (`#filter select`): solo afecta al **historial**. Valores: `all`, `it`, `dev`, `manager`, `pm`, `av`, `art`. El `<select>` está oculto salvo `:hover` sobre `#filter`.
+Filtro de categorías (`#filter select`): solo afecta al **historial**. Valores: `all`, `it`, `dev`, `manager`, `pm`, `av`, `art`. El filtro va en una fila debajo de Historial/Habilidades (`#menu` en columna, `.menu-row`). El `<select>` está **siempre visible**.
 
 Cabecera: foto, nombre, iconos. El botón share (`fa-share-alt`) llama `clickToCopy(this)` con `text-copy="https://codepen.io/nandordena/full/VwGMwVY"`. Clase `.copyed` ~1s → tooltip “Copiado en el portapapeles”.
 

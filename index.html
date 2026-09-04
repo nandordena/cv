@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body data-section-status="h">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <img src="https://i.ibb.co/602ynvG5/33f30303-d351-4e69-8abe-1114c5fc2814-20250120-1403.jpg" alt="Si no sale la foto es porque el antivirus me ha detectado como un aamenaza. <⁠(⁠￣⁠︶⁠￣⁠)⁠>">
+    <h1>Fernando Moya Llasat</h1>
+    <h2 class="tColor2 iconLink">
+      <a href="https://www.linkedin.com/in/nandordena" target="_blank">
+        <i class="fa fa-linkedin"></i> 
+      </a>
+      <a href="mailto:nandordena@gmail.com" target="_blank">
+        <i class="fa fa-google"></i>
+      </a>
+      <a href="https://codepen.io/nandordena/" target="_blank">
+        <i class="fa fa-codepen"></i>
+      </a>
+      <a href="#" text-copy="https://codepen.io/nandordena/full/VwGMwVY" onclick="clickToCopy(this)">
+        <i class="fa fa-share-alt"></i>
+      </a>
+    </h2>
+    <div id="contact"></div>
+    <div id="menu">
+      <button onclick="chageSection(this);" data-section="h" >Historial</button>
+      <button onclick="chageSection(this);" data-section="s" >Habilidades</button>
+        <div id="filter" class="dflex tColor2 dInline">
+        <i class="fa fa-filter" aria-hidden="true"></i>
+        <select>
+          <option value="all">Todos</option>
+          <option value="it">Informática</option>
+          <option value="dev">Desarollo</option>
+          <option value="manager">Gestion de equipos</option>
+          <option value="pm">Gestion de proyecto</option>
+          <option value="av">Audiovisuales</option>
+          <option value="art">Arte</option>
+        </select>
+        </div> 
+      <br>
+      <button  class="display-skills" onclick="chageSubSection(this);"  data-section="s">Por Tipo</button>
+      <button  class="display-skills" onclick="chageSubSection(this);"  data-section="s-x">Por Experiencia (Pronto)</button> 
+    </div>
+    
+    <div class="display-skills" id="skills"></div>
+    <div class="display-history" id="history"></div>
+<body>
+<script src="script.js"></script>
+</body>
+</html>
+    

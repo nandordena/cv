@@ -9,6 +9,7 @@
     
     color:var(--color1);
     font-size:15px;
+    user-select: none;
   }
   body{
     margin: 1em auto;

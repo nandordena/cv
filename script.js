@@ -366,6 +366,35 @@ cv = [
      ,type:'event'
      ,url:"https://www.cursor.com/"
    }// Masterclass liderazgo IA
+   ,{
+     position:'CommandBot'
+     ,category:'it,dev'
+     ,date:'2026-04-07'
+     ,description:`Desarrollo independiente personal
+       Ejercicio de aprendizaje de desarrollo con IA en Node.js
+       Uso de Twitch API, Youtube API y Groq IA
+       Autenticación con contexto Bearer de API`
+     ,skills:'JavaScript,Json,IAs'
+     ,newSkills:'Node.js,Twitch-API,Youtube-API,Groq-API,Bearer'
+     ,type:'course'
+     ,url:"https://github.com/nandordena/chatBot"
+     ,image:'https://i.ibb.co/BRWVrt4/Captura-de-pantalla-2026-09-04-230910.png'
+   }//CommandBot
+   ,{
+      position:'Twilio-API'
+      ,date:'2015-05-01'
+      ,dateEnd:'2017-01-01'
+      ,description:`Implementación de sistema de videoconferencias
+        Integración de la API de Twilio
+        Desarrollo de cliente JavaScript y backend PHP
+        Comunicación de audio y vídeo en tiempo real`
+      ,skills:'Html,Css,JavaScript,Php'
+      ,newSkills:'Twilio-API,WebRTC'
+      ,type:'event'
+      ,image:'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Twilio-logo-red.svg/960px-Twilio-logo-red.svg.png?utm_source=es.wikipedia.org&utm_campaign=index&utm_content=thumbnail'
+      ,url:'https://github.com/nandordena/twilio-video.js'
+      ,category:'it,dev'
+    }//Twilio Video
  ];
  
  // config
@@ -627,17 +656,20 @@ cv = [
    }, 1000);
  }
  function toggleProfileGif(ele){
-   if(ele.classList.contains('still')){
+   if(!ele.classList.contains('still') && !ele.classList.contains('playing')){ 
+    ele.classList.remove('still');
+    ele.classList.add('playing');
+   }else if(ele.classList.contains('still')){
      ele.classList.remove('still');
      ele.classList.add('playing');
      return;
-   }
-   if(ele.classList.contains('playing') || ele.matches(':hover')){
+   }else if(ele.classList.contains('playing') || ele.matches(':hover')){
      ele.classList.remove('playing');
      ele.classList.add('still');
      return;
+   }else{
+     ele.classList.add('still');
    }
-   ele.classList.add('playing');
  }
  function resetProfileGif(ele){
    ele.classList.remove('still');

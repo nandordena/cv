@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preload" as="image" href="https://i.ibb.co/NdhMtH81/character-360.gif">
 
 </head>
 <body data-section-status="h">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <img src="https://i.ibb.co/HLqfymk5/Chat-GPT-Image-4-sept-2026-21-52-21.png" alt="Si no sale la foto es porque el antivirus me ha detectado como una amenaza. <⁠(⁠￣⁠︶⁠￣⁠)⁠>">
+    <div id="profile" class="still" onclick="toggleProfileGif(this)" onmouseleave="resetProfileGif(this)">
+      <img class="profile-still" src="https://i.ibb.co/HLqfymk5/Chat-GPT-Image-4-sept-2026-21-52-21.png" alt="Si no sale la foto es porque el antivirus me ha detectado como una amenaza. <⁠(⁠￣⁠︶⁠￣⁠)⁠>">
+      <img class="profile-gif" src="https://i.ibb.co/NdhMtH81/character-360.gif" alt="">
+    </div>
     <h1>Fernando Moya Llasat</h1>
     <h2 class="tColor2 iconLink">
       <a href="https://www.linkedin.com/in/nandordena" target="_blank">

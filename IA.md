@@ -64,7 +64,7 @@ Filtro de categorías (`#filter select`): solo afecta al **historial**. Valores:
 
 GET `?filter=`: en `load`, `applyFilterFromGet()` lee `URLSearchParams` `filter`. Si coincide **exactamente** con el `value` de un `<option>` del select, asigna el select y llama `changeFilter`. Si falta o no coincide, no filtra. No hay lista duplicada en JS: la fuente de valores válidos es el propio `<select>`. Ejemplo: `index.html?filter=dev`.
 
-Cabecera: foto, nombre, iconos. El botón share (`fa-share-alt`) llama `clickToCopy(this)` con `text-copy="https://codepen.io/nandordena/full/VwGMwVY"`. Clase `.copyed` ~1s → tooltip “Copiado en el portapapeles”.
+Cabecera: foto en `#profile` (estática `.profile-still` + GIF `.profile-gif` `https://i.ibb.co/NdhMtH81/character-360.gif`). Hover o clase `playing` muestra el GIF (crossfade `opacity 0.5s`). Clic con el GIF visible → clase `still` (vuelve a la foto aunque siga el hover). Clic con `still` → `playing` otra vez. `onmouseleave` → `resetProfileGif` quita `still` para que el siguiente hover funcione. Precarga: `<link rel="preload" as="image">` en el `<head>` y el GIF ya va en el DOM. Nombre, iconos. El botón share (`fa-share-alt`) llama `clickToCopy(this)` con `text-copy="https://codepen.io/nandordena/full/VwGMwVY"`. Clase `.copyed` ~1s → tooltip “Copiado en el portapapeles”.
 
 `#contact` está vacío.
 

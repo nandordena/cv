@@ -626,6 +626,22 @@ cv = [
      ele.classList.remove('copyed');
    }, 1000);
  }
+ function toggleProfileGif(ele){
+   if(ele.classList.contains('still')){
+     ele.classList.remove('still');
+     ele.classList.add('playing');
+     return;
+   }
+   if(ele.classList.contains('playing') || ele.matches(':hover')){
+     ele.classList.remove('playing');
+     ele.classList.add('still');
+     return;
+   }
+   ele.classList.add('playing');
+ }
+ function resetProfileGif(ele){
+   ele.classList.remove('still');
+ }
  
  //Events
  function isValidFilterValue(select,value){

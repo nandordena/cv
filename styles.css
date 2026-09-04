@@ -31,7 +31,7 @@
   
   img{object-fit: contain;}
   a{ color: inherit; text-decoration: none;}
-  h1{font-size:2.5em;margin: 0.5em 0 0.25em;}
+  h1{font-size:2.5em;margin: 0.5em 0 0.25em; text-align: center;}
   h2{font-size:1.5em;margin: 0.5em 0 0.25em;}
   button{
     border: solid 1px var(--color2);
@@ -84,9 +84,44 @@
   .nowrap{white-space:nowrap;}
   
   /*Styles*/
-  body>img{
+  #profile{
+    position: relative;
+    height: 15em;
+    cursor: pointer;
+  }
+  #profile img{
     height:15em;
     filter: brightness(0.935);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  #profile .profile-gif{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(2.8, 2.8) translate(-19%, 30%);
+    transform-origin: center;
+    z-index: -1;
+    clip-path: polygon(145px 5px, 145px 85px, 85px 85px, 85px 5px);
+    filter: contrast(0.75) brightness(1.4);
+  }
+  #profile:hover .profile-gif
+  ,#profile.playing .profile-gif{
+    opacity: 1;
+  }
+  #profile:hover .profile-still
+  ,#profile.playing .profile-still{
+    opacity: 0;
+  }
+  #profile.still .profile-gif
+  ,#profile.still:hover .profile-gif{
+    opacity: 0;
+  }
+  #profile.still .profile-still
+  ,#profile.still:hover .profile-still{
+    opacity: 1;
   }
   #history{
     position:relative;

@@ -14,6 +14,7 @@ cv = [
      ,url:'https://www.classlife.education/'
      ,category:'it,dev,manager,pm'
    }//classlife
+
   /**,{
     position: 'Prueba de Desarollo'
     ,date:'2020-08-15'
@@ -26,6 +27,7 @@ cv = [
     ,category:'it,dev,manager,pm'
     ,type:'event'
   }// Prueba tecnica Classlife**/
+  
    ,{
      position:'WEB Developer'
      ,date:'2020-01-15'
@@ -192,10 +194,10 @@ cv = [
      ,dateEnd:'2008-06-01'
      ,description:``
      ,newSkills:'Informática,Electrónica,Telecomunicaciones'
-     ,image:"https://portal.edu.gva.es/iesleopoldo/wp-content/uploads/sites/774/2020/11/cropped-logoW2.png"
+     ,image:"https://portal.edu.gva.es/iesleopoldo/wp-content/uploads/sites/774/2026/04/cropped-logo-nou-ies.webp"
      ,imageStyle:"transform: scale(0.7);"
      ,type:'course'
-     ,url:"https://portal.edu.gva.es/iesleopoldo/es/inici-2-es/"
+     ,url:"https://portal.edu.gva.es/iesleopoldo/es/inici3-es/"
    }//Electrónica
    ,{
      position:'PGS Electricidad'
@@ -203,10 +205,10 @@ cv = [
      ,dateEnd:'2006-06-01'
      ,description:``
      ,newSkills:'Electricidad'
-     ,image:"https://portal.edu.gva.es/iesleopoldo/wp-content/uploads/sites/774/2020/11/cropped-logoW2.png"
+     ,image:"https://portal.edu.gva.es/iesleopoldo/wp-content/uploads/sites/774/2026/04/cropped-logo-nou-ies.webp"
      ,imageStyle:"transform: scale(0.7);"
      ,type:'course'
-     ,url:"https://portal.edu.gva.es/iesleopoldo/es/inici-2-es/"
+     ,url:"https://portal.edu.gva.es/iesleopoldo/es/inici3-es/"
    }//Electricidad
    
    // Extra jobs

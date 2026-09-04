@@ -33,6 +33,7 @@ Arranque (`window` `load`):
 2. `printHistory()` (sin filtro)
 3. `printSkills()`
 4. `change` en `#filter select` → `changeFilter`
+5. `applyFilterFromGet()` si hay query `filter` válido
 
 ---
 
@@ -60,6 +61,8 @@ Botones:
 - “Por Experiencia (Pronto)” → `chageSubSection` `data-section="s-x"` — **igual, no implementado**; `s-x` no tiene reglas CSS de visibilidad
 
 Filtro de categorías (`#filter select`): solo afecta al **historial**. Valores: `all`, `it`, `dev`, `manager`, `pm`, `av`, `art`. El filtro va en una fila debajo de Historial/Habilidades (`#menu` en columna, `.menu-row`). El `<select>` está **siempre visible**.
+
+GET `?filter=`: en `load`, `applyFilterFromGet()` lee `URLSearchParams` `filter`. Si coincide **exactamente** con el `value` de un `<option>` del select, asigna el select y llama `changeFilter`. Si falta o no coincide, no filtra. No hay lista duplicada en JS: la fuente de valores válidos es el propio `<select>`. Ejemplo: `index.html?filter=dev`.
 
 Cabecera: foto, nombre, iconos. El botón share (`fa-share-alt`) llama `clickToCopy(this)` con `text-copy="https://codepen.io/nandordena/full/VwGMwVY"`. Clase `.copyed` ~1s → tooltip “Copiado en el portapapeles”.
 

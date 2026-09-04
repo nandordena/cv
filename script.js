@@ -27,7 +27,7 @@ cv = [
     ,category:'it,dev,manager,pm'
     ,type:'event'
   }// Prueba tecnica Classlife**/
-  
+
    ,{
      position:'WEB Developer'
      ,date:'2020-01-15'
@@ -576,7 +576,7 @@ cv = [
    printSkills();
    // Listeners
    document.querySelector("#filter select").addEventListener('change',changeFilter);
-   
+   applyFilterFromGet();
  });
  
  // Functions
@@ -628,6 +628,20 @@ cv = [
  }
  
  //Events
+ function isValidFilterValue(select,value){
+   for(let i=0;i<select.options.length;i++){
+     if(select.options[i].value == value) return true;
+   }
+   return false;
+ }
+ function applyFilterFromGet(){
+   let select = document.querySelector("#filter select");
+   let param = new URLSearchParams(window.location.search).get('filter');
+   if(param == null) return;
+   if(!isValidFilterValue(select,param)) return;
+   select.value = param;
+   changeFilter.call(select);
+ }
  function changeFilter(){
    if(this.value == 'all'){
      console.info(`clean filter`);

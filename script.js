@@ -677,6 +677,96 @@ printSkills = ()=>{
  });
  
 }
+printFormalSkills = ()=>{
+ calculateSkills();
+ const skillGroups = {
+   'Informática': [
+     'Symphony','JQuery','Phyton','AWS','Selenium','Asp','Docker','Git','HTML','CSS',
+     'JScript','PHP','SQL','Windows Server','Linux','C','Wordpress','ChatGPT','Cursor_IA',
+     'Agile','Scroom','Tec.Informatico','MacOS'
+   ],
+   'Audiovisuales': [
+     'OBS','OpneLP','YT.Studio','Twitch','Tec.Sonido','Mesa de luces','Beringer-X32',
+     'ZaraRadio','A.Adition','Reaper','A.Premiere','InDesing','Canva'
+   ],
+   'Ofimática': ['MS-Access','FileMaker','AcrobatPro+Js','MS.Office','Google Workspace'],
+   'Electrónica': ['Telecomunicaciones','Electrónica','Electricidad','Fontanería'],
+   'Arte': [
+     'CorelDraw','Autocat','A.Illustrator','Photoshop',
+     'Carpintería','Dibujo','Bajo','Guitarra','Batería','Canto'
+   ]
+ };
+ const skillExperienceSources = {
+   Canva:'A.Premiere',
+   'Tec.Informatico':'Informática',
+   'MS.Office':'Offimática'
+ };
+ const skillHourOverrides = {
+   HTML:21000,
+   CSS:21000,
+   JScript:21000,
+   Git:2500,
+   PHP:21000,
+   SQL:21000
+ };
+ const roundToTwoSignificantDigits = value=>{
+   if(value === 0) return 0;
+   const scale = Math.pow(10,Math.floor(Math.log10(Math.abs(value)))-1);
+   return Math.round(value/scale)*scale;
+ };
+ const getSkillExperience = (name)=>{
+   const source = skillExperienceSources[name] ?? name;
+   if(skills[source]) return skills[source].time;
+   return cv.reduce((time,work)=>{
+     const workSkills = [...(work.skills ?? '').split(','), ...(work.newSkills ?? '').split(',')]
+       .map(skill=>skill.trim());
+     return time + (workSkills.includes(source) ? getWorkTime(work) : 0);
+   },0);
+ };
+ const groups = Object.entries(skillGroups).map(([category,names])=>({
+   category,
+   items: names
+     .map(name=>({name,time:getSkillExperience(name)}))
+     .filter(skill=>skill.time > 0)
+     .sort((a,b)=>b.time-a.time)
+ }));
+ const experienceTimes = groups.flatMap(group=>group.items.map(skill=>skill.time));
+ const minTime = Math.min(...experienceTimes);
+ const maxTime = Math.max(...experienceTimes);
+ document.querySelector("#skills").innerHTML = `
+   <h2 class="formal-skills-title">Habilidades</h2>
+   ${groups.map(group=>`
+     <section class="formal-skill-category">
+       <h2>${group.category}</h2>
+       <div class="formal-skill-cloud">
+         ${group.items.map(skill=>{
+           const weight = maxTime === minTime
+             ? 0.5
+             : (Math.log(skill.time)-Math.log(minTime))/(Math.log(maxTime)-Math.log(minTime));
+           const fontSize = (0.9 + weight * 1.1).toFixed(2);
+             const displayedHours = skillHourOverrides[skill.name] ?? skill.time / (3600000 * 6);
+             const hours = roundToTwoSignificantDigits(displayedHours).toLocaleString('es-ES');
+             const tooltip = `${hours} h de experiencia`;
+             return `<button type="button" class="formal-skill-word" style="font-size:${fontSize}rem" title="${tooltip}" data-tooltip="${tooltip}" aria-label="${skill.name}: ${tooltip}" aria-expanded="false">${skill.name}</button>`;
+         }).join('')}
+       </div>
+     </section>
+   `).join('')}
+ `;
+ document.querySelectorAll('#skills .formal-skill-word').forEach(button=>{
+   button.addEventListener('click',()=>{
+     const isOpen = button.classList.contains('tooltip-visible');
+     document.querySelectorAll('#skills .formal-skill-word.tooltip-visible').forEach(openButton=>{
+       openButton.classList.remove('tooltip-visible');
+       openButton.setAttribute('aria-expanded','false');
+     });
+     if(!isOpen){
+       button.classList.add('tooltip-visible');
+       button.setAttribute('aria-expanded','true');
+     }
+   });
+ });
+}
 // String extencions
 Object.assign(String.prototype, {
    newRowRender() { return this.toString().replaceAll(/\n/g,'<br>'); }
@@ -798,6 +888,11 @@ function changeModel(){
  document.body.setAttribute('data-model',this.value);
  const pdfLink = document.querySelector('#pdf-link');
  pdfLink.href = this.value === 'formal' ? pdfLink.dataset.formalHref : pdfLink.dataset.carreraHref;
+ if(this.value === 'formal'){
+   printFormalSkills();
+ }else{
+   printSkills();
+ }
  renderHistory();
 }
 function renderHistory(){

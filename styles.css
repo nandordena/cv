@@ -411,6 +411,15 @@ body[data-model="formal"] #history::before{
   border-radius: 3px;
   font-size: 0.9em;
 }
+.formal-skills .formal-new-skill{
+  background: var(--color3);
+  color: #fff;
+}
+.formal-new-skill::before{
+  content: "+";
+  margin-right: 0.35em;
+  font-weight: bold;
+}
 
 /*Seudo*/
 [data-time]{

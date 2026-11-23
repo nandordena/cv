@@ -486,11 +486,20 @@ printFormalHistory = (filter)=>{
      ? ''
      : (a.dateEnd ? a.dateEnd.toDate(dateFormat) : 'Actualidad');
    const dateRange = `${a.date.toDate(dateFormat)}${dateEnd ? ` – ${dateEnd}` : ''}`;
-   const allSkills = [...(a.skills ?? '').split(','), ...(a.newSkills ?? '').split(',')]
+   const existingSkills = (a.skills ?? '')
+     .split(',')
      .map(skill=>skill.trim())
-     .filter(Boolean);
-   const skillList = allSkills.length
-     ? `<ul class="formal-skills">${allSkills.map(skill=>`<li>${skill}</li>`).join('')}</ul>`
+     .filter(Boolean)
+     .map(skill=>`<li>${skill}</li>`)
+     .join('');
+   const newSkills = (a.newSkills ?? '')
+     .split(',')
+     .map(skill=>skill.trim())
+     .filter(Boolean)
+     .map(skill=>`<li class="formal-new-skill">${skill}</li>`)
+     .join('');
+   const skillList = existingSkills || newSkills
+     ? `<ul class="formal-skills" aria-label="Habilidades previas y nuevas adquiridas, marcadas con +">${existingSkills}${newSkills}</ul>`
      : '';
    const image = a.image
      ? `<img class="formal-image" src="${a.image}" alt="" loading="lazy">`

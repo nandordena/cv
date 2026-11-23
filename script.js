@@ -375,6 +375,7 @@ cv = [
    ,imageStyle:'transform: scale(0.6);'
    ,image:'https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/cursor.png'
    ,type:'event'
+   ,formalSection:'training'
    ,url:"https://www.cursor.com/"
  }// Masterclass liderazgo IA
  ,{
@@ -413,27 +414,12 @@ cv = [
 dateFormat = {year:'numeric', month:'long'};
 imageDefault = 'https://i.ibb.co/LpbBXSW/image.png';
 skills = {};
+currentHistoryFilter = null;
 // Printing
 printHistory = (filter)=>{
  historyEle.innerHTML = "";
  
- cv
- .filter((a)=>{
-   if(!filter) return true;
-   if(filter['type'] && !a.type.includes(filter['type']) ) return false;
-   if(filter['category'] && (!a.category || !a.category.includes(filter['category']) ) ) return false;
-   if(filter['skill']){
-     filter['skill'].forEach((s)=>{
-       if(!a.skills.includes(s)) return false;
-       if(!a.newSkills.includes(s)) return false;
-       return false;
-     })
-   };
-   return true;
- })
- .sort((a,b)=>{
-   return (new Date(b.date)).getTime() - (new Date(a.date)).getTime() 
- })
+ getHistoryEntries(filter)
  .forEach(a=>{
    let years = (new Date(
      (a.dateEnd?new Date(a.dateEnd):new Date()) 
@@ -481,6 +467,84 @@ printHistory = (filter)=>{
    historyEle.insertAdjacentHTML('beforeend',html);
  });
 }
+printFormalHistory = (filter)=>{
+ historyEle.innerHTML = "";
+ const typeLabels = {
+   employment: 'Experiencia',
+   promotion: 'Promoción',
+   study: 'Formación',
+   course: 'Formación',
+   event: 'Proyecto y eventos',
+   voluntary: 'Voluntariado'
+ };
+ const entries = getHistoryEntries(filter);
+ const isTrainingEntry = a=>a.type === 'study' || a.type === 'course' || a.formalSection === 'training';
+ const experienceEntries = entries.filter(a=>!isTrainingEntry(a));
+ const trainingEntries = entries.filter(isTrainingEntry);
+ const renderEntries = (items)=>items.map(a=>{
+   const dateEnd = a.dateEnd === 'no'
+     ? ''
+     : (a.dateEnd ? a.dateEnd.toDate(dateFormat) : 'Actualidad');
+   const dateRange = `${a.date.toDate(dateFormat)}${dateEnd ? ` – ${dateEnd}` : ''}`;
+   const allSkills = [...(a.skills ?? '').split(','), ...(a.newSkills ?? '').split(',')]
+     .map(skill=>skill.trim())
+     .filter(Boolean);
+   const skillList = allSkills.length
+     ? `<ul class="formal-skills">${allSkills.map(skill=>`<li>${skill}</li>`).join('')}</ul>`
+     : '';
+   const image = a.image
+     ? `<img class="formal-image" src="${a.image}" alt="" loading="lazy">`
+     : '<span class="formal-image-placeholder" aria-hidden="true"></span>';
+   const html = `
+     <article class="formal-entry" data-type="${a.type ?? 'employment'}">
+       ${image}
+       <div class="formal-entry-content">
+         <div class="formal-entry-header">
+           <h3>${a.position}</h3>
+           <span class="formal-date">${dateRange}</span>
+         </div>
+         <span class="formal-type">${isTrainingEntry(a) ? 'Formación' : typeLabels[a.type] ?? 'Experiencia'}</span>
+         ${a.description ? `<p>${a.description.newRowRender()}</p>` : ''}
+         ${skillList}
+       </div>
+     </article>
+   `;
+   return html;
+ }).join('');
+ if(trainingEntries.length){
+   historyEle.insertAdjacentHTML('beforeend',`
+     <section class="formal-section">
+       <h2>Formación</h2>
+       ${renderEntries(trainingEntries)}
+     </section>
+   `);
+ }
+ if(experienceEntries.length){
+   historyEle.insertAdjacentHTML('beforeend',`
+     <section class="formal-section">
+       <h2>Experiencia</h2>
+       ${renderEntries(experienceEntries)}
+     </section>
+   `);
+ }
+}
+getHistoryEntries = (filter)=> cv
+ .filter((a)=>{
+   if(!filter) return true;
+   if(filter['type'] && !a.type.includes(filter['type']) ) return false;
+   if(filter['category'] && (!a.category || !a.category.includes(filter['category']) ) ) return false;
+   if(filter['skill']){
+     filter['skill'].forEach((s)=>{
+       if(!a.skills.includes(s)) return false;
+       if(!a.newSkills.includes(s)) return false;
+       return false;
+     })
+   };
+   return true;
+ })
+ .sort((a,b)=>{
+   return (new Date(b.date)).getTime() - (new Date(a.date)).getTime()
+ });
 calculateSkills = ()=>{
  skills = [];
  cv.forEach(work => {
@@ -617,6 +681,8 @@ window.addEventListener('load',()=>{
  printSkills();
  // Listeners
  document.querySelector("#filter select").addEventListener('change',changeFilter);
+ document.querySelector("#model-selector").addEventListener('change',changeModel);
+ applyModelFromGet();
  applyFilterFromGet();
 });
 
@@ -702,12 +768,33 @@ function applyFilterFromGet(){
  select.value = param;
  changeFilter.call(select);
 }
+function applyModelFromGet(){
+ const model = new URLSearchParams(window.location.search).get('M');
+ if(!model || model.toUpperCase() !== 'F') return;
+ const select = document.querySelector("#model-selector");
+ select.value = 'formal';
+ changeModel.call(select);
+}
 function changeFilter(){
+ currentHistoryFilter = this.value == 'all' ? null : {"category":this.value};
  if(this.value == 'all'){
    console.info(`clean filter`);
-   printHistory();
+   renderHistory();
  }else{
    console.info(`filter by '${this.value}'`);
-   printHistory({"category":this.value});
+   renderHistory();
+ }
+}
+function changeModel(){
+ document.body.setAttribute('data-model',this.value);
+ const pdfLink = document.querySelector('#pdf-link');
+ pdfLink.href = this.value === 'formal' ? pdfLink.dataset.formalHref : pdfLink.dataset.carreraHref;
+ renderHistory();
+}
+function renderHistory(){
+ if(document.body.getAttribute('data-model') == 'formal'){
+   printFormalHistory(currentHistoryFilter);
+ }else{
+   printHistory(currentHistoryFilter);
  }
 }

@@ -1,64 +1,81 @@
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preload" as="image" href="https://i.ibb.co/NdhMtH81/character-360.gif">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Página</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="https://i.ibb.co/NdhMtH81/character-360.gif">
 
 </head>
-<body data-section-status="h">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body data-section-status="h" data-model="carrera">
+  <div class="model-switcher">
+    <select id="model-selector" aria-label="Modelo de visualización">
+      <option value="carrera">Carrera</option>
+      <option value="formal">Formal</option>
+    </select>
+  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="resume-header">
     <div id="profile" onclick="toggleProfileGif(this)" onmouseleave="resetProfileGif(this)">
-      <img class="profile-still" src="https://i.ibb.co/HLqfymk5/Chat-GPT-Image-4-sept-2026-21-52-21.png" alt="Si no sale la foto es porque el antivirus me ha detectado como una amenaza. <⁠(⁠￣⁠︶⁠￣⁠)⁠>">
+      <img class="profile-still" src="https://i.ibb.co/HLqfymk5/Chat-GPT-Image-4-sept-2026-21-52-21.png"
+        alt="Si no sale la foto es porque el antivirus me ha detectado como una amenaza. <⁠(⁠￣⁠︶⁠￣⁠)⁠>">
       <img class="profile-gif" src="https://i.ibb.co/NdhMtH81/character-360.gif" alt="">
     </div>
-    <h1>Fernando Moya Llasat</h1>
-    <h2><i class="fa fa-phone"> <a href="tel:+34627165270">627 16 52 70<h2>
-    <h2 class="tColor2 iconLink">
-      <a href="https://www.linkedin.com/in/nandordena" target="_blank">
-        <i class="fa fa-linkedin"></i> 
-      </a>
-      <a href="https://codepen.io/nandordena/" target="_blank">
-        <i class="fa fa-codepen"></i>
-      </a>
-      <a href="https://github.com/nandordena?tab=repositories" target="_blank">
-        <i class="fa fa-github"></i>
-      </a>
-      <a href="mailto:nandordena@gmail.com" target="_blank">
-        <i class="fa fa-google"></i>
-      </a>
-      <a href="#" text-copy="https://codepen.io/nandordena/full/VwGMwVY" onclick="clickToCopy(this)">
-        <i class="fa fa-share-alt"></i>
-      </a>
-      <a href="https://drive.google.com/file/d/1vYaS488HQ03fetkkglsJNxfbcdehEzDf/view?usp=sharing">
-        <i class="fa fa-print"></i>
-      </a>
-    </h2>
-    <div id="contact"></div>
-    <div id="menu">
-      <div class="menu-row">
-        <button onclick="chageSection(this);" data-section="h" >Historial</button>
-        <button onclick="chageSection(this);" data-section="s" >Habilidades</button>
-      </div>
-      <div id="filter" class="menu-row tColor2">
-        <i class="fa fa-filter" aria-hidden="true"></i>
-        <select>
-          <option value="all">Todos</option>
-          <option value="it">Informática</option>
-          <option value="dev">Desarollo</option>
-          <option value="manager">Gestion de equipos</option>
-          <option value="pm">Gestion de proyecto</option>
-          <option value="av">Audiovisuales</option>
-          <option value="art">Arte</option>
-        </select>
-      </div>
+    <div class="resume-contact">
+      <h1>Fernando Moya Llasat</h1>
+      <h2 class="phone"><i class="fa fa-phone"></i> <a href="tel:+34627165270">627 16 52 70</a></h2>
+      <h2 class="tColor2 iconLink">
+        <a href="https://www.linkedin.com/in/nandordena" target="_blank">
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="https://codepen.io/nandordena/" target="_blank">
+          <i class="fa fa-codepen"></i>
+        </a>
+        <a href="https://github.com/nandordena?tab=repositories" target="_blank">
+          <i class="fa fa-github"></i>
+        </a>
+        <a href="mailto:nandordena@gmail.com" target="_blank">
+          <i class="fa fa-google"></i>
+        </a>
+        <a href="#" text-copy="https://codepen.io/nandordena/full/VwGMwVY" onclick="clickToCopy(this)">
+          <i class="fa fa-share-alt"></i>
+        </a>
+        <a id="pdf-link"
+           href="https://drive.google.com/file/d/1vYaS488HQ03fetkkglsJNxfbcdehEzDf/view?usp=sharing"
+           data-carrera-href="https://drive.google.com/file/d/1vYaS488HQ03fetkkglsJNxfbcdehEzDf/view?usp=sharing"
+           data-formal-href="https://drive.google.com/file/d/1xb5oSdH_6IZ3wSnTnnQZNQ_9g7ys3Dpu/view?usp=sharing">
+          <i class="fa fa-print"></i>
+        </a>
+      </h2>
     </div>
-    
-    <div class="display-skills" id="skills"></div>
-    <div class="display-history" id="history"></div>
-<body>
-<script src="script.js"></script>
-</body>
+  </div>
+  <div id="contact"></div>
+  <div id="menu">
+    <div class="menu-row">
+      <button onclick="chageSection(this);" data-section="h">Historial</button>
+      <button onclick="chageSection(this);" data-section="s">Habilidades</button>
+    </div>
+    <div id="filter" class="menu-row tColor2">
+      <i class="fa fa-filter" aria-hidden="true"></i>
+      <select>
+        <option value="all">Todos</option>
+        <option value="it">Informática</option>
+        <option value="dev">Desarollo</option>
+        <option value="manager">Gestion de equipos</option>
+        <option value="pm">Gestion de proyecto</option>
+        <option value="av">Audiovisuales</option>
+        <option value="art">Arte</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="display-skills" id="skills"></div>
+  <div class="display-history" id="history"></div>
+
+  <body>
+    <script src="script.js"></script>
+  </body>
+
 </html>
-    

@@ -868,10 +868,10 @@ function applyFilterFromGet(){
  changeFilter.call(select);
 }
 function applyModelFromGet(){
- const model = new URLSearchParams(window.location.search).get('M');
- if(!model || model.toUpperCase() !== 'F') return;
+ const requestedModel = new URLSearchParams(window.location.search).get('M');
+ const model = requestedModel && requestedModel.toUpperCase() === 'C' ? 'carrera' : 'formal';
  const select = document.querySelector("#model-selector");
- select.value = 'formal';
+ select.value = model;
  changeModel.call(select);
 }
 function changeFilter(){
